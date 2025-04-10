@@ -6,8 +6,7 @@ const LISTA_PRESENTES = [
     { id: 4, nome: "Vale-Experiência Jantar Romântico", loja: "Restaurante Sabor & Arte", valor: "R$ 500,00", imagem:"images/Cena romántica con flores y velas plateadas y rosa roja en la mesa IA generativa _ Imagen Premium generada con IA.jpeg", selecionado: false },
     { id: 5, nome: "Smart TV 55 Polegadas", loja: "EletroMega", valor: "R$ 2.800,00", imagem:"images/Smart TV 55” UHD 4K LED Samsung Lançamento 2023 - 55CU7700 Wi-Fi Bluetooth Alexa 3 HDMI.jpeg", selecionado: false },
     { id: 6, nome: "Cafeteira Premium", loja: "EletroCasa", valor: "R$ 450,00", imagem:"images/Detalles de la Cafetera Digital ⚡️☁️.jpeg", selecionado: false },
-    { id: 7, nome: "Carro do noivo", loja: "Audi", valor: "R$ 344.760,00", imagem: "images/El Audi A4 vuelve a México con rostro renovado y sólo como mild-hybrid_ estos son sus precios.jpeg", selecionado: false},
-    { id: 8, nome: "Viagem de lua de mel", loja: "Agência estrelinha", valor: "R$ 344.760,00", imagem: "images/El Audi A4 vuelve a México con rostro renovado y sólo como mild-hybrid_ estos son sus precios.jpeg", selecionado: false}
+    { id: 7, nome: "Carro do noivo", loja: "Audi", valor: "R$ 344.760,00", imagem: "images/El Audi A4 vuelve a México con rostro renovado y sólo como mild-hybrid_ estos son sus precios.jpeg", selecionado: false}
 ];
 
 // Convidado falso para testes
