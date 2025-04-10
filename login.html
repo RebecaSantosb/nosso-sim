@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área dos Convidados - Nosso Grande Dia</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="icon" type="image/x-icon"
+        href="images/ChatGPT Image 1_04_2025, 14_42_16.png">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Área dos Convidados</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn">Entrar</button>
+            </form>
+            <p class="register-link">Não tem acesso? <a class="link" href="register.html">Solicite aqui</a></p>
+            
+            <div class="demo-credentials">
+                <h3>Dados para Teste (Convidado Falso)</h3>
+                <p><strong>E-mail:</strong> Joao@gmail.com</p>
+                <p><strong>Senha:</strong> casamento123</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Credenciais do convidado falso
+        const CONVIDADO_FALSO = {
+            nome: "João Roberto",
+            email: "Joao@gmail.com",
+            senha: "casamento123",
+            relacao: "Amigo da noiva",
+            presencaConfirmada: false,
+            presentesSelecionados: []
+        };
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (email === CONVIDADO_FALSO.email && password === CONVIDADO_FALSO.senha) {
+                // Salva os dados do convidado na sessionStorage
+                sessionStorage.setItem('convidadoLogado', JSON.stringify(CONVIDADO_FALSO));
+                window.location.href = 'convidado.html';
+            } else {
+                alert('E-mail ou senha incorretos. Tente novamente ou use os dados de teste.');
+            }
+        });
+
+        // Preenche automaticamente os campos de teste ao carregar a página
+        window.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('email').value = CONVIDADO_FALSO.email;
+            document.getElementById('password').value = CONVIDADO_FALSO.senha;
+        });
+    </script>
+</body>
+</html>

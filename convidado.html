@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do Convidado - Nosso Grande Dia</title>
+    <link rel="stylesheet" href="convidado.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon"
+    href="images/ChatGPT Image 1_04_2025, 14_42_16.png">
+</head>
+
+<body class="convidado-area">
+<div class="header1">
+    <header class="convidado-header">
+        <h1 id="welcome-message">Bem-vindo</h1>
+        <a href="index.html" class="logout">Sair</a>
+    </header>
+
+    <nav class="convidado-nav">
+        <ul>
+            <li class="nav-item"><a href="#confirmacao">Confirmar Presença</a></li>
+            <li class="nav-item"><a href="#presentes">Lista de Presentes</a></li>
+            <li class="nav-item"><a href="#regras">Regras do Evento</a></li>
+            <li class="nav-item"><a href="#caronas">Caronas Solidárias</a></li>
+        </ul>
+    </nav>
+</div>
+    <main class="convidado-main">
+        <div class="user-profile">
+            <div class="user-avatar" id="user-avatar">A</div>
+            <div class="user-info">
+                <h3 id="user-name">Convidado</h3>
+                <p id="user-relation">Relação com o casal</p>
+            </div>
+        </div>
+
+        <section id="confirmacao" class="convidado-section">
+            <h2>Confirmação de Presença</h2>
+            <form id="confirmacaoForm">
+                <div class="form-group">
+                    <label class="pergunta">Você comparecerá ao evento?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="presenca" value="sim" required> Sim, com certeza!</label>
+                        <label><input type="radio" name="presenca" value="nao"> Infelizmente não poderei</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="text-form" for="acompanhantes">Número de acompanhantes</label>
+                    <input type="number" id="acompanhantes" min="0" max="5">
+                </div>
+                <div class="form-group">
+                    <label class="text-form" for="restricoes">Restrições alimentares</label>
+                    <textarea id="restricoes" placeholder="Alguma alergia ou restrição alimentar?"></textarea>
+                </div>
+                <button type="submit" class="btn">Confirmar</button>
+            </form>
+        </section>
+
+        <section id="presentes" class="convidado-section">
+            <h2>Lista de Presentes</h2>
+            <div class="presentes-grid" id="presentes-grid">
+                <!-- Itens serão carregados via JavaScript -->
+            </div>
+        </section>
+
+        <section id="regras" class="regras-card">
+            <h2>Regras do Evento</h2>
+            <div class="regras-container">
+            <div class="regras-content">
+                <div class="detail-icon"><i class="fa-solid fa-user-tie"></i></div>
+                <h3 class="regras-title">Dress Code</h3>
+                <p class="regras-text">Esperamos que nossos convidados venham com trajes elegantes em tons pastel.</p>
+            </div>
+            <div class="regras-content">
+                <div class="detail-icon"><i class="fa-solid fa-clock"></i></div>
+                <h3 class="regras-title">Horários</h3>
+                <p class="regras-text">A cerimônia começará pontualmente às 16h. Pedimos que cheguem com 30 minutos de antecedência.</p>
+            </div>
+            <div class="regras-content">
+                <div class="detail-icon"><i class="fa-solid fa-baby"></i></div>
+                <h3 class="regras-title">Crianças</h3>
+                <p class="regras-text">O evento é apenas para adultos. Agradecemos a compreensão.</p>
+                 </div> 
+                </div>
+                <div class="confirmar-regras">
+                    <label>
+                        <input type="checkbox" id="confirmarRegras"> Eu li e concordo com as regras do evento
+                    </label>
+                    <button id="btnConfirmarRegras" class="btn" disabled>Confirmar Leitura</button>
+                </div>
+          
+        </section>
+
+        <section id="caronas" class="convidado-section">
+            <h2>Caronas Solidárias</h2>
+            <p>Ajude-nos a reduzir o impacto ambiental organizando caronas:</p>
+            <div class="caronas-options">
+                <button class="btn" id="btnOferecerCarona">Oferecer carona</button>
+                <button class="btn" id="btnPrecisarCarona">Preciso de carona</button>
+            </div>
+            <div class="caronas-map" id="caronas-map">
+                <!-- Mapa de caronas será carregado aqui -->
+            </div>
+        </section>
+    </main>
+
+    <script src="convidado.js"></script>
+    <script>
+        // Carrega os dados do convidado logado
+        document.addEventListener('DOMContentLoaded', function() {
+            const convidadoLogado = JSON.parse(sessionStorage.getItem('convidadoLogado'));
+            
+            if (!convidadoLogado) {
+                alert('Acesso não autorizado. Redirecionando para login...');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Atualiza a interface com os dados do convidado
+            document.getElementById('welcome-message').textContent = `Bem-vindo, ${convidadoLogado.nome}`;
+            document.getElementById('user-name').textContent = convidadoLogado.nome;
+            document.getElementById('user-relation').textContent = convidadoLogado.relacao;
+            document.getElementById('user-avatar').textContent = convidadoLogado.nome.charAt(0);
+            
+            // Se já tiver confirmado presença, mostra os dados
+            if (convidadoLogado.presencaConfirmada !== undefined) {
+                const form = document.getElementById('confirmacaoForm');
+                if (form) {
+                    const radio = form.querySelector(`input[value="${convidadoLogado.presencaConfirmada ? 'sim' : 'nao'}"]`);
+                    if (radio) radio.checked = true;
+                    
+                    if (convidadoLogado.acompanhantes) {
+                        document.getElementById('acompanhantes').value = convidadoLogado.acompanhantes;
+                    }
+                    
+                    if (convidadoLogado.restricoes) {
+                        document.getElementById('restricoes').value = convidadoLogado.restricoes;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
